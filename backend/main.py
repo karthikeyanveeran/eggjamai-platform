@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from config import settings
+import os
 from routes import conversation, assessment, challenges, advanced_features, platform_admin, auth, school, mood
 
 # Create FastAPI app
@@ -10,10 +11,17 @@ app = FastAPI(
     description="AI-powered mental health & character building platform for students"
 )
 
-# Configure CORS
+# Configure CORS for production
+allowed_origins = [
+    "https://eggjam.ai",
+    "https://www.eggjam.ai",
+    "http://localhost:5173",
+    "http://localhost:3000"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins_list,
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

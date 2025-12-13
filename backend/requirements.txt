@@ -11,11 +11,7 @@ python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 python-multipart==0.0.6
 alembic==1.13.0
-numpy==1.26.2.0
-sqlalchemy==2.0.23
-python-jose[cryptography]==3.3.0
-passlib[bcrypt]==1.7.4
-python-multipart==0.0.6
+numpy==1.26.2
 aiofiles==23.2.1
 python-socketio==5.10.0
 agora-token-builder==1.2.0

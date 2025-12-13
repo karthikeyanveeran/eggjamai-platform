@@ -1,0 +1,6 @@
+DATABASE_URL=postgresql://neondb_owner:npg_Z45uzoXjnWgA@ep-hidden-smoke-a1vlwlrq-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require
+POSTGRES_URL=postgresql://neondb_owner:npg_Z45uzoXjnWgA@ep-hidden-smoke-a1vlwlrq-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require
+POSTGRES_USER=neondb_owner
+POSTGRES_HOST=ep-hidden-smoke-a1vlwlrq-pooler.ap-southeast-1.aws.neon.tech
+POSTGRES_PASSWORD=npg_Z45uzoXjnWgA
+POSTGRES_DATABASE=neondb
