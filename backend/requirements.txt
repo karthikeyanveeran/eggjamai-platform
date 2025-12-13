@@ -14,4 +14,4 @@ alembic==1.13.0
 numpy==1.26.2
 aiofiles==23.2.1
 python-socketio==5.10.0
-agora-token-builder==1.2.0
+agora-token-builder==1.0.0
