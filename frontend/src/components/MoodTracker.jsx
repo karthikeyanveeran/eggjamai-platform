@@ -120,7 +120,7 @@ function MoodTracker() {
       </header>
 
       {/* Mood Selection */}
-      <div className="mood-selection glass-panel">
+      <div className="mood-selection">
         <h2>Select Your Mood</h2>
         <div className="mood-grid">
           {moodEmojis.map((mood) => (
@@ -142,7 +142,7 @@ function MoodTracker() {
 
       {/* Emotion Tags */}
       {selectedMood && (
-        <div className="emotion-tags glass-panel">
+        <div className="emotion-tags">
           <h2>What emotions are you experiencing?</h2>
           <div className="emotion-grid">
             {emotionOptions.map((emotion) => (
@@ -161,7 +161,7 @@ function MoodTracker() {
 
       {/* Notes */}
       {selectedMood && (
-        <div className="mood-notes glass-panel">
+        <div className="mood-notes">
           <h2>Any thoughts to share? (Optional)</h2>
           <textarea
             className="notes-input"
