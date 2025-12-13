@@ -51,9 +51,11 @@ async def read_root():
 @app.get("/health")
 async def health_check():
     """Health check endpoint."""
+    import datetime
     return {
         "status": "healthy",
-        "timestamp": "2024-01-01T00:00:00Z"
+        "service": "eggjamai-backend",
+        "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
     }
 
 # Mount Socket.IO to the FastAPI app
