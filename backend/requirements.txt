@@ -1,11 +1,2 @@
-fastapi
-uvicorn
-python-socketio
-python-multipart
-pydantic
-python-jose[cryptography]
-passlib[bcrypt]
-sqlalchemy
-psycopg2-binary
-openai
-requests
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
