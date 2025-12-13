@@ -150,67 +150,73 @@ function Dashboard() {
         </div>
       </div>
 
-      {/* Mood Trend */}
-      <div className="mood-trend glass-panel">
-        <h2>Weekly Mood Trend</h2>
-        <div className="mood-chart">
-          {moodTrend.map((entry, index) => (
-            <div key={index} className="mood-bar-container">
-              <div 
-                className="mood-bar"
-                style={{
-                  height: `${entry.mood * 10}%`,
-                  backgroundColor: getMoodColor(entry.mood)
-                }}
-              >
-                <span className="mood-value">{entry.mood}</span>
-              </div>
-              <div className="mood-day">{entry.day}</div>
+      <div className="dashboard-main-grid">
+        <div className="dashboard-left-col">
+          {/* Mood Trend */}
+          <div className="mood-trend glass-panel">
+            <h2>Weekly Mood Trend</h2>
+            <div className="mood-chart">
+              {moodTrend.map((entry, index) => (
+                <div key={index} className="mood-bar-container">
+                  <div 
+                    className="mood-bar"
+                    style={{
+                      height: `${entry.mood * 10}%`,
+                      backgroundColor: getMoodColor(entry.mood)
+                    }}
+                  >
+                    <span className="mood-value">{entry.mood}</span>
+                  </div>
+                  <div className="mood-day">{entry.day}</div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className="mood-average">
-          <span>Average Mood:</span>
-          <span className="average-value">{stats.averageMood}/10</span>
-        </div>
-      </div>
-
-      {/* Recent Activity */}
-      <div className="recent-activity glass-panel">
-        <h2>Recent Activity</h2>
-        <div className="activity-list">
-          {recentActivities.map((activity, index) => (
-            <div key={index} className="activity-item">
-              <div className="activity-icon">{activity.icon}</div>
-              <div className="activity-details">
-                <div className="activity-title">{activity.title}</div>
-                <div className="activity-time">{activity.time}</div>
-              </div>
+            <div className="mood-average">
+              <span>Average Mood:</span>
+              <span className="average-value">{stats.averageMood}/10</span>
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      {/* Quick Actions */}
-      <div className="quick-actions">
-        <h2>Quick Actions</h2>
-        <div className="action-buttons">
-          <button className="action-button glass-panel" onClick={() => { sounds.click(); }}>
-            <span className="action-icon">💬</span>
-            <span>Start Chat</span>
-          </button>
-          <button className="action-button glass-panel" onClick={() => { sounds.click(); }}>
-            <span className="action-icon">😊</span>
-            <span>Log Mood</span>
-          </button>
-          <button className="action-button glass-panel" onClick={() => { sounds.click(); }}>
-            <span className="action-icon">📊</span>
-            <span>Take Assessment</span>
-          </button>
-          <button className="action-button glass-panel" onClick={() => { sounds.click(); }}>
-            <span className="action-icon">🧘</span>
-            <span>Breathing Exercise</span>
-          </button>
+          {/* Quick Actions */}
+          <div className="quick-actions">
+            <h2>Quick Actions</h2>
+            <div className="action-buttons">
+              <button className="action-button glass-panel" onClick={() => { sounds.click(); }}>
+                <span className="action-icon">💬</span>
+                <span>Start Chat</span>
+              </button>
+              <button className="action-button glass-panel" onClick={() => { sounds.click(); }}>
+                <span className="action-icon">😊</span>
+                <span>Log Mood</span>
+              </button>
+              <button className="action-button glass-panel" onClick={() => { sounds.click(); }}>
+                <span className="action-icon">📊</span>
+                <span>Take Assessment</span>
+              </button>
+              <button className="action-button glass-panel" onClick={() => { sounds.click(); }}>
+                <span className="action-icon">🧘</span>
+                <span>Breathing Exercise</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="dashboard-right-col">
+          {/* Recent Activity */}
+          <div className="recent-activity glass-panel">
+            <h2>Recent Activity</h2>
+            <div className="activity-list">
+              {recentActivities.map((activity, index) => (
+                <div key={index} className="activity-item">
+                  <div className="activity-icon">{activity.icon}</div>
+                  <div className="activity-details">
+                    <div className="activity-title">{activity.title}</div>
+                    <div className="activity-time">{activity.time}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

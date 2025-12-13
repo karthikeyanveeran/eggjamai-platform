@@ -98,12 +98,35 @@
 }
 
 /* ============================================
+   MAIN CONTENT GRID (Desktop Layout)
+   ============================================ */
+.dashboard-main-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* 2 parts Chart/Actions, 1 part Activity */
+  gap: 32px;
+  align-items: start;
+}
+
+.dashboard-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.dashboard-right-col {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ============================================
    MOOD TREND SECTION
    ============================================ */
 
 .mood-trend {
-  margin-bottom: 32px;
+  /* Removed margin-bottom, handled by parent grid/flex gap */
   padding: 32px;
+  height: 100%; /* Fill height if needed */
 }
 
 .mood-trend h2 {
@@ -193,8 +216,9 @@
    ============================================ */
 
 .recent-activity {
-  margin-bottom: 32px;
+  /* Removed margin-bottom */
   padding: 32px;
+  height: 100%;
 }
 
 .recent-activity h2 {
@@ -255,7 +279,7 @@
    ============================================ */
 
 .quick-actions {
-  margin-bottom: 32px;
+  /* No margin needed if it's the last item in a flex col */
 }
 
 .quick-actions h2 {
@@ -307,13 +331,21 @@
    RESPONSIVE DESIGN
    ============================================ */
 
+/* Tablet & Mobile: Stack everything */
+@media (max-width: 1024px) {
+  .dashboard-main-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
 @media (max-width: 768px) {
   .dashboard-header h1 {
     font-size: 2rem;
   }
 
   .stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Stack stats on mobile */
   }
 
   .mood-chart {
@@ -324,7 +356,8 @@
   .mood-bar {
     max-width: 40px;
   }
-
+  
+  /* On mobile 2 buttons per row is OK */
   .action-buttons {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -351,6 +384,7 @@
     font-size: 2rem;
   }
 
+  /* One button per row on very small screens */
   .action-buttons {
     grid-template-columns: 1fr;
   }
