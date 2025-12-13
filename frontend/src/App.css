@@ -5,13 +5,13 @@
 .app {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  /* Background is now handled in index.css body */
   position: relative;
   overflow-x: hidden;
 }
 
 /* ============================================
-   SIDEBAR STYLES
+   SIDEBAR STYLES (Cosmic Glass Dock)
    ============================================ */
 
 .sidebar {
@@ -19,14 +19,15 @@
   left: 0;
   top: 0;
   height: 100vh;
-  background: rgba(15, 12, 41, 0.95);
-  backdrop-filter: blur(20px);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(3, 0, 20, 0.6); /* Semi-transparent deep base */
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid var(--glass-border);
   display: flex;
   flex-direction: column;
   z-index: 1000;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
+  transition: width 0.4s cubic-bezier(0.2, 0, 0, 1);
+  box-shadow: 4px 0 40px rgba(0, 0, 0, 0.4);
 }
 
 .sidebar.open {
@@ -34,158 +35,164 @@
 }
 
 .sidebar.closed {
-  width: 80px;
+  width: 88px; /* Slightly wider for better icon clickability */
 }
 
 /* Sidebar Header */
 .sidebar-header {
-  padding: 24px 20px;
+  height: 80px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 24px;
+  gap: 16px;
+  border-bottom: 1px solid var(--glass-border);
   position: relative;
 }
 
 .logo {
-  font-size: 2.5rem;
-  filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6));
-  transition: all 0.3s ease;
+  font-size: 2rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 15px rgba(124, 58, 237, 0.5));
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1) rotate(5deg);
 }
 
 .logo-text {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  letter-spacing: -0.01em;
+  background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin: 0;
+  -webkit-text-fill-color: transparent;
   white-space: nowrap;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards 0.1s;
+}
+
+.sidebar.closed .logo-text {
+  display: none;
 }
 
 .sidebar-toggle {
   position: absolute;
-  right: -12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
+  right: -14px;
+  top: 40px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: 2px solid rgba(15, 12, 41, 1);
-  color: white;
-  font-size: 10px;
-  cursor: pointer;
+  background: #1e1b4b; /* Indigo 950 */
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  cursor: pointer;
+  transition: all 0.2s ease;
   z-index: 10;
+  font-size: 10px;
 }
 
 .sidebar-toggle:hover {
-  transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+  background: var(--color-primary);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--color-primary-glow);
 }
 
 /* Sidebar Navigation */
 .sidebar-nav {
   flex: 1;
-  padding: 20px 12px;
+  padding: 24px 16px;
   overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.sidebar-nav::-webkit-scrollbar {
-  width: 6px;
-}
-
-.sidebar-nav::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 3px;
-}
-
-.sidebar-nav::-webkit-scrollbar-thumb {
-  background: rgba(102, 126, 234, 0.5);
-  border-radius: 3px;
-}
-
-.sidebar-nav::-webkit-scrollbar-thumb:hover {
-  background: rgba(102, 126, 234, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Tighter gap */
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  margin-bottom: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 16px;
+  padding: 12px 16px;
   border-radius: 12px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent; /* Prevent layout shift */
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
   width: 100%;
-  text-align: left;
-  white-space: nowrap;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .nav-item:hover {
-  background: rgba(102, 126, 234, 0.2);
-  border-color: rgba(102, 126, 234, 0.4);
+  background: rgba(255, 255, 255, 0.04);
   color: white;
-  transform: translateX(4px);
 }
 
 .nav-item.active {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
-  border-color: rgba(102, 126, 234, 0.6);
+  background: rgba(124, 58, 237, 0.15);
   color: white;
-  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+  border-color: rgba(124, 58, 237, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 3px;
+  background: var(--color-primary);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 0 10px var(--color-primary);
 }
 
 .nav-icon {
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   min-width: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.2s;
+}
+
+.nav-item:hover .nav-icon {
+  transform: scale(1.1);
 }
 
 .nav-label {
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sidebar.closed .nav-label {
-  display: none;
+  white-space: nowrap;
+  opacity: 0.9;
 }
 
 .sidebar.closed .nav-item {
+  padding: 12px;
   justify-content: center;
-  padding: 14px;
 }
 
 /* Sidebar Footer */
 .sidebar-footer {
-  padding: 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 16px;
+  border-top: 1px solid var(--glass-border);
 }
 
 .logout-btn {
-  background: rgba(239, 68, 68, 0.1);
-  border-color: rgba(239, 68, 68, 0.3);
+  margin-top: 0;
+  color: #f43f5e; /* Rose 500 */
 }
 
 .logout-btn:hover {
-  background: rgba(239, 68, 68, 0.2);
-  border-color: rgba(239, 68, 68, 0.5);
-  transform: translateX(0);
+  background: rgba(244, 63, 94, 0.1);
+  color: #fb7185;
 }
 
 /* ============================================
@@ -194,23 +201,23 @@
 
 .main-content {
   flex: 1;
-  margin-left: 280px;
-  padding: 32px;
-  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-left: 280px; /* Match open width */
+  padding: 40px;
+  transition: margin-left 0.4s cubic-bezier(0.2, 0, 0, 1);
   min-height: 100vh;
 }
 
 .sidebar.closed ~ .main-content {
-  margin-left: 80px;
+  margin-left: 88px; /* Match closed width */
 }
 
 .view-container {
   max-width: 1400px;
   margin: 0 auto;
-  animation: fadeInUp 0.5s ease;
+  animation: slideUpFade 0.5s cubic-bezier(0.2, 0, 0, 1);
 }
 
-@keyframes fadeInUp {
+@keyframes slideUpFade {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -221,8 +228,12 @@
   }
 }
 
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
 /* ============================================
-   RESPONSIVE DESIGN
+   RESPONSIVE (Mobile)
    ============================================ */
 
 @media (max-width: 1024px) {
@@ -234,32 +245,33 @@
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
+    width: 280px; /* Always full width on mobile when open */
+    box-shadow: 20px 0 50px rgba(0,0,0,0.5);
   }
 
   .sidebar.open {
     transform: translateX(0);
-    width: 280px;
   }
 
   .main-content {
-    margin-left: 0;
-    padding: 16px;
+    margin-left: 0 !important;
+    padding: 20px;
+    padding-top: 80px; /* Space for mobile header toggle */
   }
 
-  .sidebar.closed ~ .main-content {
-    margin-left: 0;
-  }
-
+  /* Custom mobile toggle needed in App.jsx usually, 
+     but assuming the fixed toggle from sidebar works: */
   .sidebar-toggle {
     position: fixed;
-    left: 16px;
-    top: 16px;
-    z-index: 1001;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: none;
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
+    top: 20px;
+    left: 20px;
+    right: auto;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    background: rgba(30, 27, 75, 0.9);
+    border-radius: 12px;
+    z-index: 2000;
   }
 }
 

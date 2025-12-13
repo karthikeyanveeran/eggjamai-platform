@@ -42,36 +42,51 @@
    STATS GRID
    ============================================ */
 
+/* ============================================
+   STATS GRID
+   ============================================ */
+
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
   margin-bottom: 32px;
 }
 
 .stat-card {
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 24px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  gap: 24px;
+  padding: 32px;
+  /* Glass panel styles inherited from .glass-panel class in JSX */
+  position: relative;
+  overflow: hidden;
 }
 
-.stat-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(102, 126, 234, 0.4);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.2);
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card:hover::before {
+  opacity: 1;
 }
 
 .stat-icon {
   font-size: 3rem;
-  filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
+  filter: drop-shadow(0 0 20px rgba(124, 58, 237, 0.4));
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.1) rotate(5deg);
 }
 
 .stat-info {
@@ -79,136 +94,62 @@
 }
 
 .stat-value {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   line-height: 1;
   margin-bottom: 8px;
+  background: linear-gradient(135deg, white 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: white; /* Fallback */
 }
 
 .stat-label {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.95rem;
-  font-weight: 500;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.05em;
 }
-
-/* ============================================
-   MAIN CONTENT GRID (Desktop Layout)
-   ============================================ */
-.dashboard-main-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr; /* 2 parts Chart/Actions, 1 part Activity */
-  gap: 32px;
-  align-items: start;
-}
-
-.dashboard-left-col {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.dashboard-right-col {
-  display: flex;
-  flex-direction: column;
-}
-
 
 /* ============================================
    MOOD TREND SECTION
    ============================================ */
 
 .mood-trend {
-  /* Removed margin-bottom, handled by parent grid/flex gap */
   padding: 32px;
-  height: 100%; /* Fill height if needed */
-}
-
-.mood-trend h2 {
-  font-size: 1.8rem;
-  margin: 0 0 24px 0;
-  color: white;
+  height: 100%;
 }
 
 .mood-chart {
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
-  height: 200px;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
-  margin-bottom: 20px;
-}
-
-.mood-bar-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-  max-width: 80px;
+  height: 240px;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius-md);
+  margin-bottom: 24px;
+  border: 1px solid rgba(255,255,255,0.05);
 }
 
 .mood-bar {
   width: 100%;
-  max-width: 50px;
-  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+  max-width: 48px;
+  background: linear-gradient(to top, var(--color-primary), #a78bfa);
   border-radius: 8px 8px 0 0;
   position: relative;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  /* Glow effect */
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.1);
 }
 
 .mood-bar:hover {
   filter: brightness(1.2);
   transform: scaleY(1.05);
-}
-
-.mood-value {
-  color: white;
-  font-weight: 700;
-  font-size: 0.9rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.mood-day {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-.mood-average {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 20px;
-  background: rgba(102, 126, 234, 0.1);
-  border-radius: 12px;
-  border: 1px solid rgba(102, 126, 234, 0.2);
-}
-
-.mood-average span {
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 600;
-}
-
-.average-value {
-  font-size: 1.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.4);
 }
 
 /* ============================================
@@ -216,15 +157,8 @@
    ============================================ */
 
 .recent-activity {
-  /* Removed margin-bottom */
   padding: 32px;
   height: 100%;
-}
-
-.recent-activity h2 {
-  font-size: 1.8rem;
-  margin: 0 0 24px 0;
-  color: white;
 }
 
 .activity-list {
@@ -239,28 +173,27 @@
   gap: 16px;
   padding: 16px;
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .activity-item:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(102, 126, 234, 0.3);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateX(4px);
 }
 
 .activity-icon {
   font-size: 2rem;
-  min-width: 40px;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.activity-details {
-  flex: 1;
 }
 
 .activity-title {
@@ -270,61 +203,65 @@
 }
 
 .activity-time {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted);
   font-size: 0.85rem;
 }
 
 /* ============================================
-   QUICK ACTIONS SECTION
+   QUICK ACTIONS
    ============================================ */
-
-.quick-actions {
-  /* No margin needed if it's the last item in a flex col */
-}
-
-.quick-actions h2 {
-  font-size: 1.8rem;
-  margin: 0 0 24px 0;
-  color: white;
-}
 
 .action-buttons {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
 }
 
 .action-button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 24px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px 24px;
+  /* Reset button default */
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
   color: white;
-  font-size: 1rem;
+  border-radius: var(--radius-md);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .action-button:hover {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
-  border-color: rgba(102, 126, 234, 0.4);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.action-button:active {
-  transform: translateY(-2px);
+.action-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.action-button:hover::after {
+  opacity: 1;
 }
 
 .action-icon {
   font-size: 2.5rem;
-  filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
 }
 
 /* ============================================
@@ -340,51 +277,21 @@
 }
 
 @media (max-width: 768px) {
-  .dashboard-header h1 {
-    font-size: 2rem;
-  }
-
   .stats-grid {
-    grid-template-columns: 1fr; /* Stack stats on mobile */
-  }
-
-  .mood-chart {
-    height: 150px;
-    padding: 12px;
-  }
-
-  .mood-bar {
-    max-width: 40px;
+    grid-template-columns: 1fr;
   }
   
-  /* On mobile 2 buttons per row is OK */
+  .mood-chart {
+    height: 180px;
+    padding: 16px;
+  }
+  
   .action-buttons {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 480px) {
-  .dashboard-header h1 {
-    font-size: 1.75rem;
-  }
-
-  .subtitle {
-    font-size: 1rem;
-  }
-
-  .stat-card {
-    padding: 20px;
-  }
-
-  .stat-icon {
-    font-size: 2.5rem;
-  }
-
-  .stat-value {
-    font-size: 2rem;
-  }
-
-  /* One button per row on very small screens */
   .action-buttons {
     grid-template-columns: 1fr;
   }
