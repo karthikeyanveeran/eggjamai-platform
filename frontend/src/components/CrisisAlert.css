@@ -1,0 +1,264 @@
+/* ============================================
+   CRISIS ALERT MODAL
+   ============================================ */
+
+.crisis-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  width: 90%;
+  max-width: 600px;
+  background: rgba(15, 12, 41, 0.98);
+  backdrop-filter: blur(30px);
+  border: 3px solid;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 24px 96px rgba(0, 0, 0, 0.8);
+  animation: alertSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes alertSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Crisis Alert Backdrop */
+.crisis-alert::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   CRISIS HEADER
+   ============================================ */
+
+.crisis-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.crisis-header h3 {
+  font-size: 1.8rem;
+  margin: 0;
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.close-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  line-height: 1;
+  padding: 0;
+}
+
+.close-button:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  transform: rotate(90deg);
+}
+
+/* ============================================
+   CRISIS CONTENT
+   ============================================ */
+
+.crisis-content {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.crisis-message {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.crisis-message.urgent {
+  font-weight: 600;
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 4px solid #dc2626;
+}
+
+/* ============================================
+   RESOURCES LIST
+   ============================================ */
+
+.resources-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.resources-list li {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  color: white;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.resources-list li:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(102, 126, 234, 0.3);
+  transform: translateX(4px);
+}
+
+.resources-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+   CRISIS ACTIONS
+   ============================================ */
+
+.crisis-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.primary-button {
+  flex: 1;
+  min-width: 200px;
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.5);
+}
+
+.primary-button:active {
+  transform: translateY(0);
+}
+
+.secondary-button {
+  flex: 1;
+  min-width: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.secondary-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.secondary-button:active {
+  transform: translateY(0);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+  .crisis-alert {
+    width: 95%;
+    padding: 24px;
+  }
+
+  .crisis-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .crisis-message {
+    font-size: 1rem;
+  }
+
+  .crisis-actions {
+    flex-direction: column;
+  }
+
+  .primary-button,
+  .secondary-button {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .crisis-alert {
+    padding: 20px;
+  }
+
+  .crisis-header h3 {
+    font-size: 1.3rem;
+  }
+
+  .close-button {
+    width: 32px;
+    height: 32px;
+    font-size: 1.5rem;
+  }
+
+  .resources-list li {
+    padding: 12px 16px;
+    font-size: 0.95rem;
+  }
+}
