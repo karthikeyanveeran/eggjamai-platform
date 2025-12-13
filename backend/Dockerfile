@@ -6,5 +6,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY main_railway.py .
+COPY start.sh .
+RUN chmod +x start.sh
 
-CMD ["uvicorn", "main_railway:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["./start.sh"]
