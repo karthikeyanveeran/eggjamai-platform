@@ -10,3 +10,7 @@ psycopg2-binary
 openai
 requests
 pydantic-settings
+numpy
+scipy
+scikit-learn
+pandas
