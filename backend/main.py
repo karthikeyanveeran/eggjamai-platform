@@ -52,13 +52,19 @@ async def read_root():
 @app.get("/health")
 async def health_check():
     """Health check endpoint."""
-    import datetime
-    return {
-        "status": "healthy",
-        "service": "eggjamai-backend",
-        "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
-        "port": os.getenv("PORT", "8000")
-    }
+    try:
+        import datetime
+        return {
+            "status": "healthy",
+            "service": "eggjamai-backend",
+            "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+            "port": os.getenv("PORT", "8000")
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "error": str(e)
+        }
 
 # Mount Socket.IO to the FastAPI app
 import socketio
