@@ -5,8 +5,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY main_railway.py .
-COPY start.sh .
+COPY . .
+RUN chmod +x start.sh
 RUN chmod +x start.sh
 
 CMD ["./start.sh"]
