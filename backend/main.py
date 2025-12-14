@@ -43,8 +43,9 @@ async def read_root():
     """Root endpoint."""
     return {
         "message": "Welcome to EggJam.ai API",
-        "version": "1.0.0",
-        "status": "operational"
+        "version": "2.0.0",
+        "status": "operational",
+        "timestamp": "2025-12-14T01:50:00Z"
     }
 
 
@@ -55,7 +56,8 @@ async def health_check():
     return {
         "status": "healthy",
         "service": "eggjamai-backend",
-        "timestamp": datetime.datetime.utcnow().isoformat() + "Z"
+        "timestamp": datetime.datetime.utcnow().isoformat() + "Z",
+        "port": os.getenv("PORT", "8000")
     }
 
 # Mount Socket.IO to the FastAPI app
