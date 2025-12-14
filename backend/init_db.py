@@ -11,7 +11,7 @@ def init_db():
     """Create all tables"""
     print("Creating database tables...")
     Base.metadata.create_all(bind=engine)
-    print("✅ Database tables created successfully!")
+    print("SUCCESS: Database tables created successfully!")
     
     # Print all tables created
     print("\nTables created:")

@@ -26,6 +26,10 @@ class Settings(BaseSettings):
     # CORS
     CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000"
     
+    # Agora Configuration
+    AGORA_APP_ID: str = "test-app-id"
+    AGORA_APP_CERTIFICATE: str = "test-certificate"
+    
     @property
     def cors_origins_list(self) -> List[str]:
         return [origin.strip() for origin in self.CORS_ORIGINS.split(",")]
